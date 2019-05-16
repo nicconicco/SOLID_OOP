@@ -1,0 +1,136 @@
+/**
+ * Writed by Carlos Nicolau Galves May-2919
+ * <p>
+ * https://www.udemy.com/solid-principles-object-oriented-design-architecture/learn/v4/t/lecture/12782313?start=0
+ * <p>
+ * Liskov substitution principle
+ */
+
+ Liskov substitution principle :
+
+    Subclass or realization witch can be safely substituted for the type it extends or implements
+
+
+ HOW CAN WE DO?
+
+ Follow the next steps
+
+ Method signature rules:
+
+ 1 - If subsclass implements a method from its superclass, then the number of arguments should be the same
+
+  ------------------------           -----------------------------
+ |        Service         |         |         ServiceSub          | <--- subclass
+ |------------------------|         |-----------------------------|
+ |                        |         |                             |
+ |------------------------|         |-----------------------------|
+ |                        | <------ |                             |
+ |                        |         |                             |
+ | +doSemnthing(classArg) |         | +doSemnthing(classArgSuper) |
+ |                        |         |                             |
+ |                        |         |                             |
+ |                        |         |                             |
+  -----------------------            -----------------------------
+
+  dont make subclass method arguments more specific
+
+  classArgSuper <- classArg <- classArgSub [X]
+
+ 2 - The type of each argument in subclass method should be the supertype of the type of the respective
+     argument in superclass method
+
+     2.1 - Either both superclass and subclass methods return result or neither does
+     2.2 - If there is a result, then the type of the result in the subclass is a subtype of
+           the type of the result in the superclass
+
+
+
+   -------------------------           -----------------------------
+  |        Service          |         |         ServiceSub          | <--- subclass ( method : return like Kotlin )
+  |-------------------------|         |-----------------------------|
+  |                         |         |                             |
+  |-------------------------|         |-----------------------------|
+  |                         | <------ |                             |
+  |                         |         |                             |
+  | +doSemnthing():classArg |         | +doSemnthing():classArgSuper|
+  |                         |         |                             |
+  |                         |         |                             |
+  |                         |         |                             |
+   -------------------------           -----------------------------
+
+   dont make subclass methods return types more general!
+
+   [X]  classArgSuper <- classArg <- classArgSub
+
+   2.3 - Exception rule is enforced by the compiler for "checked" exceptions
+         The compiler doesnt check "unchecked" exceptions
+
+
+         handle ParseFailedException -> KaraokePlyer -> LyricsParser <- thows ParseFailedException
+                                                              .
+                                                             / \
+                                                              |
+
+                   throws InvalidEncryptionException -> EncryptedLyricsParser
+
+        1 Situation :
+            if InvalidEncryptionException is a proper subtype of ParseFailedException then it`s ALL RIGHT
+        2 Situation :
+            if not,  KaraokePlyer won`t be able to handle it and the system probably crash.
+
+    Solution:
+        Don`t throw new types of exceptions from subclasses, bro.
+
+
+ 3 - An assertion about the state of the system before the method is called
+
+    Pre-condition rule:
+
+    Pre-conditions required by the subclass`method mustn`t be stronger than
+    the pre-conditions required by the superclass method.
+
+      ------------------------           -----------------------------
+     |        Service         |         |         ServiceSub          | <--- subclass
+     |------------------------|         |-----------------------------|
+     |                        |         |                             |
+     |------------------------|         |-----------------------------|
+     |                        | <------ |                             |
+     |                        |         |                             |
+     | +doSemnthing(classArg) |         | +doSemnthing(classArgSuper) | <--- non-null
+     |                        |         |                             |
+     |                        |         |                             |
+     |                        |         |                             |
+      -----------------------            -----------------------------
+     valid reference or null
+
+     ServiceSub isn`t a proper subtype because it requires stronger pre-conditions!
+
+
+     Post-condition:
+
+     An assertion about the state of the system after method`s execution completes
+
+     Post-conditions guaranteed by the subclass`method mustn`t be weaker than the post-conditions
+     guaranteed by the superclass`method
+
+ 4 - Invariant:
+
+     An assertion about class property that always holds
+
+     rule:
+
+        Invariants guaranteed by the subclass must ensure invariants guaranteed by the superclass
+
+    Constraint:
+
+    An assertion about how class property evolver over time
+
+    Constraints enforced by the subclass must ensure constraints enforced by the superclass
+
+
+
+
+
+
+
+

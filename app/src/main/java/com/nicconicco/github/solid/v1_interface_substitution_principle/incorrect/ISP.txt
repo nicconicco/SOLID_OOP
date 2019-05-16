@@ -1,0 +1,1 @@
+Clients shouldn`t be forced to depend on methods they don`t use

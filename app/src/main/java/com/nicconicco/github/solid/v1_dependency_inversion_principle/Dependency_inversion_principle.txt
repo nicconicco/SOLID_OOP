@@ -1,0 +1,106 @@
+    DIP:
+
+
+    High-level modules should not depend on low-level modules. Both should depend on abstractions.
+
+    Abstractions should not depend on details. Details should depend on abstractions
+
+
+    Top down design
+
+
+                             BussinessDominaClass                       | Flow of Control
+                                     /\                                 |
+                                    /  \                                |
+                                   /    \                               |
+                                  /      \                              \/
+                                 /        \
+                                /          \
+                               /            \
+                              \/            \/
+                     FunctionClass1         FunctionClass2
+                         /\
+                        /  \
+                       /    \
+                      /      \
+                     /        \
+                    /          \
+                   /            \
+                  \/            \/
+         FunctionalClass3 ---> FunctionClass4
+
+
+        Hierarchy is the natural outcome
+
+
+
+        -
+
+        Abstractions and dependency inversion
+
+        Before:
+
+                     TopLevelClass
+                          |
+                         \ /
+                          .
+                      MidLevelClass
+                      /           \
+                    \ /           \ /
+                     .             .
+          BottomLevelClass1 ----> BottomLevelClass2
+
+
+        After:
+                             TopLevelClass
+                                  |
+                                 \ /
+                                  .
+                              AbstractMidLevelClass
+                                       .
+                                      / \  <-- Inverted Dependency
+                                       |
+                                       |
+                                 MidLevelClass
+                                /             \
+                              \ /             \ /
+                               .               .
+                    BottomLevelClass1 -----> BottomLevelClass2
+
+
+   DIP Benefits
+
+   --
+   1 - Protection from future changes in requierements
+   --
+   Module A depends B
+
+   With DI A implements Abstract middler and B need to be ok with this implements so A can do FakeImpl And continuous your works.
+
+   2 - Develop and test with fake implementations of external dependencies
+
+   ---
+
+   3 - Easier integration between modules
+
+   ---
+
+   4 - Change organizational intra- and inter-dependencies
+
+
+   DIP cost:
+
+   1 - Initial introduction
+   2 - Require more effort to change
+   3 - Increased code complexity due to dependency inversion
+
+   [ INTRODUCE ABSTRACTIONS ONLY WHEN BENEFITS OUTWEIGHT THE COST ]
+
+   DIP is exceptionally powerful concept that you should use judiciously!
+
+
+
+
+
+
+
