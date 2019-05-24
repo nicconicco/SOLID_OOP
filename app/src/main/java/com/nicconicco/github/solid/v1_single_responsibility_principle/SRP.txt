@@ -1,0 +1,18 @@
+  REF: https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html
+
+   1 - Separar em modulos que possam variar
+   2 - Separação de preocupações
+   3 - acoplamento e coesão ( responsabilidades )
+   4 - Responsabilidade unica ( todas acima )
+   5 - 
+      Quando você escreve um módulo de software, deseja ter certeza de que, quando mudanças são solicitadas, essas mudanças podem ser originadas apenas de uma única pessoa, ou melhor, um único grupo de pessoas fortemente acopladas representando uma única função de negócios definida de forma restrita. Você deseja isolar seus módulos das complexidades da organização como um todo e projetar seus sistemas de modo que cada módulo seja responsável (responda) às necessidades de apenas uma função de negócios.
+
+      Esta é a razão pela qual não colocamos o SQL em JSPs. Esta é a razão pela qual não geramos HTML nos módulos que calculam os resultados. Essa é a razão pela qual as regras de negócios não devem conhecer o esquema do banco de dados. Esta é a razão pela qual separamos as preocupações.
+
+      “Reúna as coisas que mudam pelas mesmas razões. Separe as coisas que mudam por diferentes razões.”
+
+      Se você pensar sobre isso, perceberá que essa é apenas outra maneira de definir a coesão e o acoplamento. Queremos aumentar a coesão entre coisas que mudam pelas mesmas razões e queremos diminuir o acoplamento entre as coisas que mudam por diferentes razões.
+
+      Entretanto, ao pensar sobre este princípio, lembre-se de que as razões para a mudança são pessoas. São pessoas que solicitam mudanças. E você não quer confundir essas pessoas, ou a si mesmo, misturando o código com o qual muitas pessoas diferentes se preocupam por diferentes razões.
+
+   ____
